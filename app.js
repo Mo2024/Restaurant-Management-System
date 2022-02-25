@@ -4,6 +4,8 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError')
 const path = require('path');
+const flash = require('connect-flash');
+const session = require('express-session')
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -27,6 +29,22 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '/public')));
+
+const sessionConfig = {
+    // store,
+    name: 'session',
+    secret: process.env.SESSION_SEC,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true
+        // secure: true
+    }
+}
+app.use(session(sessionConfig));
+app.use(flash());
 
 app.use((req, res, next) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
