@@ -28,6 +28,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
+    res.locals.currentUser = req.user;
+    res.locals.msg = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
+
 app.get('/', (req, res) => {
     res.render("home")
 });

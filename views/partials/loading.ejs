@@ -1,0 +1,26 @@
+<div class="parent-wrapper">
+    <div class="loader-wrapper">
+        <div class="loader mt-3">
+            <div class="loader-inner"></div>
+        </div>
+
+    </div>
+
+    <h3 class="h3">
+        Thank you for your patience!
+        <br>
+        The page will load shortly :)
+    </h3>
+</div>
+<script>
+    $(window).on("load", function () {
+        $(".parent-wrapper").fadeOut("slow");
+        $('body').css('overflow', 'visible');
+    });
+</script>
+<script>
+    const loader = document.querySelector('.parent-wrapper');
+    document.body.onbeforeunload = (event) => {
+        loader.style.display = "flex";
+    };
+</script>
