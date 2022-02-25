@@ -6,13 +6,10 @@ function changeBg() {
         'url("https://www.forumdaily.com/wp-content/uploads/2018/07/Depositphotos_88670080_m-2015.jpg")'
     ]
 
-    // const body = document.getElementsByTagName("BODY")[0]
-    let bg = images[Math.floor(Math.random() * images.length)];
-    // body.style.backgroundImage = `${grad}${bg}`;
-    bg = `${grad}${bg}`
-    $('body').fadeTo('slow', 0.3, function () {
-        $(this).css('background-image', bg);
-    }).delay(1000).fadeTo('slow', 1);
+    const body = document.getElementsByTagName("BODY")[0]
+    const bg = images[Math.floor(Math.random() * images.length)];
+    body.style.backgroundImage = `${grad}${bg}`;
+
 
     console.log("works")
 
