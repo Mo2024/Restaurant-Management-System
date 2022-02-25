@@ -1,11 +1,12 @@
 body {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://static.thatsup.co/content/img/article/13/sep/h%C3%A4r-hittar-du-stockholms-b%C3%A4sta-renodlade-hamburgerrestauranger.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/a4f01c82667439.5d24aafde4b5e.jpg");
   background-size: cover;
   background-position: center;
   text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
-  /* transition: background 1s linear; */
+  -webkit-transition: background-image  1s linear;
+  transition: background-image  1s linear;
 
 }
 .cover-container {

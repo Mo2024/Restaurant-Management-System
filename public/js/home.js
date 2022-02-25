@@ -1,3 +1,4 @@
+
 function changeBg() {
 
     const grad = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),"
@@ -7,14 +8,8 @@ function changeBg() {
     ]
 
     const body = document.getElementsByTagName("BODY")[0]
-    const bg = images[Math.floor(Math.random() * images.length)];
+    let bg = images[Math.floor(Math.random() * images.length)];
     body.style.backgroundImage = `${grad}${bg}`;
-
-
-    console.log("works")
-
 }
 
-setInterval(changeBg, 1000)
-
-// console.log('skjlah')
+setInterval(changeBg, 5000);
