@@ -58,6 +58,10 @@ app.get('/', (req, res) => {
     res.render("home")
 });
 
+app.get('/home', (req, res) => {
+    res.render("home")
+});
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page not Found', 404))
