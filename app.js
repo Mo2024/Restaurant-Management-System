@@ -2,10 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-const ExpressError = require('./utils/ExpressError')
+const ExpressError = require('./utils/ExpressError');
 const path = require('path');
 const flash = require('connect-flash');
-const session = require('express-session')
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -45,6 +48,13 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig));
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser()) //How to store user in session
+passport.deserializeUser(User.deserializeUser()) //How to get user out of session
 
 app.use((req, res, next) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
