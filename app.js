@@ -65,7 +65,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/', require('./routes/auth'))
+app.use('/', require('./routes/auth')) // Auth routes
 
 app.get('/', (req, res) => {
     res.render("home")
