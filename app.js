@@ -29,6 +29,7 @@ app.engine('ejs', ejsMate)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '/public')));
@@ -66,14 +67,13 @@ app.use((req, res, next) => {
 })
 
 app.use('/', require('./routes/auth')) // Auth routes
+app.use('/main', require('./routes/main')) // main routes
 
 app.get('/', (req, res) => {
     res.render("home")
 });
 
-app.get('/main', (req, res) => {
-    res.render("main/home")
-});
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page not Found', 404))

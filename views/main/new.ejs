@@ -1,0 +1,54 @@
+<% layout('/layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/stars.css">
+
+<section class="container row mx-auto">
+
+    <div class="col-lg-6">
+        <h1 class="text-white">New menu section</h1>
+        <form action="/main/new/section" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label class="form-label text-white" for="name">Title</label>
+                <input class="form-control" type="text" name="section[name]" id="name" required>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Add Section</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-6">
+
+        <h1 class="text-white">New Item/Meal</h1>
+        <form action="/main/new/item" method="POST" class="validated-form" novalidate enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label text-white" for="name">Name</label>
+                <input class="form-control" type="text" name="item[name]" id="name" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label text-white" for="price">Price</label>
+
+                <div class="input-group ">
+                    <span class="input-group-text" id="price-label">BHD</span>
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                        aria-describedby="price-label" name="item[price]" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label text-white" for="description">Description</label>
+                <textarea class="form-control" type="text" name="item[description]" id="description"
+                    required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">Upload Images</label>
+                <label for="image" class="form-label text-white"></label>
+                <input class="form-control" type="file" id="image" multiple name="image">
+
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add Item</button>
+            </div>
+        </form>
+    </div>
+</section>

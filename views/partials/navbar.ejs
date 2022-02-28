@@ -13,6 +13,9 @@
                 <a class="nav-link mx-1" href="/main/menu">Menu</a>
                 <a class="nav-link mx-1" href="/main/cart">Cart</a>
                 <a class="nav-link mx-1" href="/contact">Contact</a>
+                <% if(currentUser.role==="owner"||currentUser.role==="admin") {%>
+                <a href="/main/new" class="nav-link mx-1">New Menu/Item</a>
+                <% } %>
 
             </div>
             <div class="navbar-nav ms-auto">
