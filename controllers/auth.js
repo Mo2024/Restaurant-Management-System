@@ -2,14 +2,21 @@ const User = require('../models/user');
 
 module.exports.createUser = async (req, res) => {
     try {
-        const { email, username, password } = req.body;
-        const user = new User({ email, username });
-        const registeredUser = await User.register(user, password);
-        req.login(registeredUser, err => {
-            if (err) return next(err)
-            req.flash('success', 'Thank you for signing up!')
-            res.redirect('/main')
-        })
+        let { email, username, password, confirmPassword } = req.body;
+        if (password !== confirmPassword) {
+            req.flash('error', 'Passwords didn’t match. Please try again.')
+            res.redirect('/register')
+        } else {
+            username = username.toLowerCase()
+            const user = new User({ email, username });
+            const registeredUser = await User.register(user, password);
+            req.login(registeredUser, err => {
+                if (err) return next(err)
+                req.flash('success', 'Thank you for signing up!')
+                res.redirect('/main')
+            })
+        }
+
     } catch (e) {
         console.log(e)
         req.flash('error', e.message)
