@@ -61,6 +61,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.msg = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.li = req.flash('li');
     next();
 })
 
