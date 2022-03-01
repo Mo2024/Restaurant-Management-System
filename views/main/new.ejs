@@ -26,6 +26,20 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label text-white" for="ection">Section</label>
+
+                <select name="section[id]" class="form-select" aria-label="Default select example">
+                    <option selected hidden>Menu Section</option>
+                    <% for (let i = 0; i < menu.length; i++)  {%>
+
+                    <option value="<%=menu[i]._id  %>"><%= menu[i].name  %> </option>
+
+                    <% } %>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label text-white" for="price">Price</label>
 
                 <div class="input-group ">

@@ -1,3 +1,7 @@
+const { MenuSchema, ItemSchema } = require('./schemas');
+const ExpressError = require('./utils/ExpressError')
+
+
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl
@@ -14,5 +18,18 @@ module.exports.isAdmin = (req, res, next) => {
         return res.redirect('/main');
     }
     next()
+
+}
+
+module.exports.validateMenu = (req, res, next) => {
+
+    const { error } = MenuSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    }
+    else {
+        next();
+    }
 
 }
