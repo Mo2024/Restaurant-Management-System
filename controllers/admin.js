@@ -1,3 +1,6 @@
+const Menu = require('../models/menu');
+const Item = require('../models/item');
+
 module.exports.new = (req, res) => {
     res.render("main/new")
 }
@@ -7,7 +10,7 @@ module.exports.newSection = async (req, res) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
     const menu = new Menu({ name });
     await menu.save();
-    req.flash('success', `Successfully added ${name} to menu`)
+    req.flash('success', `Successfully added ${name}`)
     res.redirect('/admin/new')
 }
 
@@ -19,5 +22,6 @@ module.exports.newItem = async (req, res) => {
     menu.items.push(item)
     await menu.save();
     await item.save();
+    req.flash('success', `Successfully added ${req.body.item.name}`)
     res.redirect('/admin/new')
 }

@@ -1,5 +1,6 @@
 const { MenuSchema, ItemSchema } = require('./schemas');
 const ExpressError = require('./utils/ExpressError')
+const { cloudinary } = require('./cloudinary')
 
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -35,10 +36,11 @@ module.exports.validateMenu = (req, res, next) => {
 }
 
 module.exports.validateItem = (req, res, next) => {
-
-    const { error } = ItemSchema.validate(req.body);
+    const item = { item: req.body.item }
+    const { error } = ItemSchema.validate(item);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
+        req.files.map(async f => await cloudinary.uploader.destroy(f.filename));
         throw new ExpressError(msg, 400)
     }
     else {
