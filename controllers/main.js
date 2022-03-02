@@ -6,9 +6,8 @@ module.exports.homepage = (req, res) => {
     res.render("main/home")
 }
 
-module.exports.new = async (req, res) => {
-    const menu = await Menu.find({});
-    res.render("main/new", { menu })
+module.exports.new = (req, res) => {
+    res.render("main/new")
 }
 
 module.exports.newSection = async (req, res) => {

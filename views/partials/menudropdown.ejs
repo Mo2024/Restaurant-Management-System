@@ -1,0 +1,30 @@
+<% if (menu.length>0){ %>
+<li class="nav-item dropdown" onmouseover="displayDropDown('dropdown-menu')" onmouseout="hideDropDown('dropdown-menu')">
+    <% } else{ %>
+<li class="nav-item dropdown">
+
+    <% } %>
+
+    <% if (menu.length>0) {%>
+    <a id="menuClassCheck" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true"
+        aria-expanded="false">
+        Menu
+    </a>
+    <div class="dropdown-menu bg-color border border-secondary" id="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item navbar-default hover-bg" href="/main/menu">Menu</a>
+        <div class="dropdown-divider border-secondary"></div>
+        <!-- DROPRIGHT START -->
+        <% for (var i = 0; i < menu.length; i++) { %>
+        <a class="dropdown-item navbar-default" href="main/menu/<%= menu[i].name%>">
+            <%= menu[i].name %></a>
+        <% } %>
+        <!-- DROPDOWN END -->
+    </div>
+    <% } else{%>
+    <a id="ignore" class="nav-link" href="/main/menu" role="button" aria-haspopup="true" aria-expanded="false">
+        Menu
+    </a>
+    <% } %>
+
+
+</li>

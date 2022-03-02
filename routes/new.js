@@ -6,12 +6,11 @@ const { isLoggedIn, isAdmin, validateMenu, validateItem } = require('../middlewa
 const multer = require('multer')
 const { storage } = require('../cloudinary/index');
 const upload = multer({ storage })
-router.get('/', main.homepage);
 
 router.route('/new')
     .get(isLoggedIn, isAdmin, main.new);
 
-router.post('/new/section', isLoggedIn, isAdmin, catchAsync(main.newSection))
+router.post('/new/section', isLoggedIn, isAdmin, validateMenu, catchAsync(main.newSection))
 
 // router.post('/new/item', upload.array('image'), catchAsync(main.newItem))
 router.post('/new/item', isLoggedIn, isAdmin, upload.array('image'), validateItem, catchAsync(main.newItem))

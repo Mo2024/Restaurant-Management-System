@@ -9,6 +9,8 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const Menu = require('./models/menu');
+const catchAsync = require('./utils/catchAsync');
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -57,14 +59,15 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser()) //How to store user in session
 passport.deserializeUser(User.deserializeUser()) //How to get user out of session
 
-app.use((req, res, next) => {
+app.use(catchAsync(async (req, res, next) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
     res.locals.currentUser = req.user;
     res.locals.msg = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.li = req.flash('li');
+    res.locals.menu = await Menu.find({});
     next();
-})
+}))
 
 app.use('/', require('./routes/auth')) // Auth routes
 app.use('/main', require('./routes/main')) // main routes

@@ -1,0 +1,20 @@
+<% if(currentUser) {%>
+<% if(currentUser.role==="owner"||currentUser.role==="admin") {%>
+<li class="nav-item dropdown" onmouseover="displayDropDown('dropdown-admin')"
+    onmouseout="hideDropDown('dropdown-admin')">
+
+
+    <a id="menuClassCheck" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true"
+        aria-expanded="false">
+        Admin
+    </a>
+    <div class="dropdown-menu bg-color border border-secondary" id="dropdown-admin" aria-labelledby="navbarDropdown">
+
+        <a href="/main/new" class="dropdown-item navbar-default">New Menu/Item</a>
+
+    </div>
+
+
+</li>
+<% } %>
+<% } %>
