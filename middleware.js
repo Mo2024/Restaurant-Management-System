@@ -23,7 +23,7 @@ module.exports.isAdmin = (req, res, next) => {
 
 module.exports.validateMenu = (req, res, next) => {
 
-    const { error } = MenuSchema.validate(req.body.section);
+    const { error } = MenuSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)
@@ -36,7 +36,7 @@ module.exports.validateMenu = (req, res, next) => {
 
 module.exports.validateItem = (req, res, next) => {
 
-    const { error } = ItemSchema.validate(req.body.item);
+    const { error } = ItemSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)

@@ -71,6 +71,7 @@ app.use(catchAsync(async (req, res, next) => {
 
 app.use('/', require('./routes/auth')) // Auth routes
 app.use('/main', require('./routes/main')) // main routes
+app.use('/admin', require('./routes/admin')) // admin routes
 
 app.get('/', (req, res) => {
     res.render("home")
