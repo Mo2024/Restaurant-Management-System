@@ -16,6 +16,11 @@ module.exports.newSection = async (req, res) => {
 
 
 module.exports.newItem = async (req, res) => {
+    if (req.body.section.id === "Menu Section") {
+        req.flash('error', `You did not choose where the item belongs in the menu`)
+        res.redirect('/admin/new')
+        return
+    }
     const menu = await Menu.findById(req.body.section.id)
     const item = new Item(req.body.item);
     item.images = req.files.map(f => ({ url: f.path, filename: f.filename }));

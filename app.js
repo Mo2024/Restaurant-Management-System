@@ -11,6 +11,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const Menu = require('./models/menu');
 const catchAsync = require('./utils/catchAsync');
+const fileUpload = require('express-fileupload')
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -68,6 +69,13 @@ app.use(catchAsync(async (req, res, next) => {
     res.locals.menu = await Menu.find({});
     next();
 }))
+
+// app.use(fileUpload({
+//     limits: {
+//         fileSize: 5000000 //5mb
+//     },
+//     abortOnLimit: true
+// }));
 
 app.use('/', require('./routes/auth')) // Auth routes
 app.use('/main', require('./routes/main')) // main routes
