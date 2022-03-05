@@ -30,3 +30,15 @@ module.exports.newItem = async (req, res) => {
     req.flash('success', `Successfully added ${req.body.item.name}`)
     res.redirect('/admin/new')
 }
+
+// module.exports.validateImage = async (req, res) => {
+
+//     // const maxSize = 1 * 1024 * 1024;
+
+//     // if (req.file.byteLength >= maxSize) {
+//     //     console.log("jkldh")
+
+//     // }
+//     next()
+
+// }

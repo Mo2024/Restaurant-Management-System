@@ -70,12 +70,13 @@ app.use(catchAsync(async (req, res, next) => {
     next();
 }))
 
-// app.use(fileUpload({
-//     limits: {
-//         fileSize: 5000000 //5mb
-//     },
-//     abortOnLimit: true
-// }));
+app.use(fileUpload({
+    limits: {
+        fileSize: 1000000 //5mb
+    },
+    responseOnLimit: 'Size Limit reached'
+
+}));
 
 app.use('/', require('./routes/auth')) // Auth routes
 app.use('/main', require('./routes/main')) // main routes
