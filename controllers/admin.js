@@ -33,12 +33,13 @@ module.exports.newItem = async (req, res) => {
 
 // module.exports.validateImage = async (req, res) => {
 
-//     // const maxSize = 1 * 1024 * 1024;
-
-//     // if (req.file.byteLength >= maxSize) {
-//     //     console.log("jkldh")
-
-//     // }
-//     next()
+//     const maxSize = 1 * 1024 * 1024;
+//     // console.log(req.files)
+//     // Object.values(req.files.image).map((file) => {
+//     //     if (file.size > 1 * 1024 * 1024) {
+//     //         console.log('s')
+//     //     }
+//     // })
+//     // next()
 
 // }

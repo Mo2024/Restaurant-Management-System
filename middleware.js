@@ -36,6 +36,7 @@ module.exports.validateMenu = (req, res, next) => {
 }
 
 module.exports.validateItem = (req, res, next) => {
+    // console.log(req.body)
     const item = { item: req.body.item }
     const { error } = ItemSchema.validate(item);
     if (error) {

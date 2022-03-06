@@ -12,6 +12,8 @@ const User = require('./models/user');
 const Menu = require('./models/menu');
 const catchAsync = require('./utils/catchAsync');
 const fileUpload = require('express-fileupload')
+const bodyParser = require('body-parser');
+
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -31,6 +33,22 @@ const app = express();
 app.engine('ejs', ejsMate)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// const sizeLimit = 1000000 //4mb
+// app.use(fileUpload({
+//     limits: {
+//         fileSize: sizeLimit
+//     },
+//     abortOnLimit: true,
+
+//     // limitHandler: (req, res, next) => {
+//     //     req.flash('error', `The maximum file size is ${sizeLimit}`)
+//     //     res.redirect('/admin/new')
+//     //     next()
+
+//     // }
+
+// }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -70,13 +88,6 @@ app.use(catchAsync(async (req, res, next) => {
     next();
 }))
 
-app.use(fileUpload({
-    limits: {
-        fileSize: 1000000 //5mb
-    },
-    responseOnLimit: 'Size Limit reached'
-
-}));
 
 app.use('/', require('./routes/auth')) // Auth routes
 app.use('/main', require('./routes/main')) // main routes
@@ -85,8 +96,6 @@ app.use('/admin', require('./routes/admin')) // admin routes
 app.get('/', (req, res) => {
     res.render("home")
 });
-
-
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page not Found', 404))
