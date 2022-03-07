@@ -11,8 +11,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const Menu = require('./models/menu');
 const catchAsync = require('./utils/catchAsync');
-const fileUpload = require('express-fileupload')
-const bodyParser = require('body-parser');
+const { sizeLimit } = require('./utils/limitSize')
 
 
 if (process.env.NODE_ENV !== "production") {
@@ -33,22 +32,6 @@ const app = express();
 app.engine('ejs', ejsMate)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-// const sizeLimit = 1000000 //4mb
-// app.use(fileUpload({
-//     limits: {
-//         fileSize: sizeLimit
-//     },
-//     abortOnLimit: true,
-
-//     // limitHandler: (req, res, next) => {
-//     //     req.flash('error', `The maximum file size is ${sizeLimit}`)
-//     //     res.redirect('/admin/new')
-//     //     next()
-
-//     // }
-
-// }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -84,6 +67,7 @@ app.use(catchAsync(async (req, res, next) => {
     res.locals.msg = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.li = req.flash('li');
+    res.locals.sizeLimit = sizeLimit;
     res.locals.menu = await Menu.find({});
     next();
 }))

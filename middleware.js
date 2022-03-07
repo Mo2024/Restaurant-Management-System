@@ -1,7 +1,7 @@
 const { MenuSchema, ItemSchema } = require('./schemas');
 const ExpressError = require('./utils/ExpressError')
 const { cloudinary } = require('./cloudinary')
-
+const { sizeLimit } = require('./utils/limitSize')
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -48,4 +48,13 @@ module.exports.validateItem = (req, res, next) => {
         next();
     }
 
+}
+
+module.exports.limitHandler = (err, req, res, next) => {
+    if (err) {
+        req.flash('error', `The maximum file size is ${sizeLimit / 1000000} MB`)
+        res.redirect('/admin/new')
+    } else {
+        next()
+    }
 }

@@ -2,7 +2,7 @@ const Menu = require('../models/menu');
 const Item = require('../models/item');
 
 module.exports.new = (req, res) => {
-    res.render("main/new")
+    res.render("admin/new")
 }
 
 module.exports.newSection = async (req, res) => {
@@ -30,16 +30,3 @@ module.exports.newItem = async (req, res) => {
     req.flash('success', `Successfully added ${req.body.item.name}`)
     res.redirect('/admin/new')
 }
-
-// module.exports.validateImage = async (req, res) => {
-
-//     const maxSize = 1 * 1024 * 1024;
-//     // console.log(req.files)
-//     // Object.values(req.files.image).map((file) => {
-//     //     if (file.size > 1 * 1024 * 1024) {
-//     //         console.log('s')
-//     //     }
-//     // })
-//     // next()
-
-// }
