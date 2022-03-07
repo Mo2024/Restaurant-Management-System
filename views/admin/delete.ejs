@@ -1,0 +1,31 @@
+<% layout('/layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/stars.css">
+
+<section class="container row mx-auto">
+
+    <div class="col-lg-6">
+        <h1 class="text-white">Delete menu section</h1>
+        <form action="/admin/menu?_method=DELETE" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label class="form-label text-white" for="section">Section</label>
+
+                <select name="section[id]" class="form-select" aria-label="Default select example">
+                    <option selected hidden>Menu Section</option>
+                    <% for (let i = 0; i < menu.length; i++)  {%>
+
+                    <option value="<%=menu[i]._id  %>"><%= menu[i].name  %> </option>
+
+                    <% } %>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Delete Section</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-6">
+
+    </div>
+</section>

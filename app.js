@@ -68,7 +68,7 @@ app.use(catchAsync(async (req, res, next) => {
     res.locals.error = req.flash('error');
     res.locals.li = req.flash('li');
     res.locals.sizeLimit = sizeLimit;
-    res.locals.menu = await Menu.find({});
+    res.locals.menu = await Menu.find({}).populate('items', 'name');
     next();
 }))
 

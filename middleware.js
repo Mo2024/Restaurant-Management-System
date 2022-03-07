@@ -52,8 +52,14 @@ module.exports.validateItem = (req, res, next) => {
 
 module.exports.limitHandler = (err, req, res, next) => {
     if (err) {
-        req.flash('error', `The maximum file size is ${sizeLimit / 1000000} MB`)
-        res.redirect('/admin/new')
+        if (err.message === "File too large") {
+            req.flash('error', `The maximum file size is ${sizeLimit / 1000000} MB`)
+            res.redirect('/admin/new')
+            return
+        }
+        // console.log(err.message)
+        throw new ExpressError(err.message, 400)
+
     } else {
         next()
     }

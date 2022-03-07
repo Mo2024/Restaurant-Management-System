@@ -5,6 +5,10 @@ module.exports.new = (req, res) => {
     res.render("admin/new")
 }
 
+module.exports.delete = async (req, res) => {
+    res.render("admin/delete")
+}
+
 module.exports.newSection = async (req, res) => {
     let { name } = req.body.menu
     name = name.charAt(0).toUpperCase() + name.slice(1);
@@ -29,4 +33,15 @@ module.exports.newItem = async (req, res) => {
     await item.save();
     req.flash('success', `Successfully added ${req.body.item.name}`)
     res.redirect('/admin/new')
+}
+
+module.exports.deleteMenu = async (req, res) => {
+    if (req.body.section.id === "Menu Section") {
+        req.flash('error', `Please select a section to delete`)
+        res.redirect('/admin/delete')
+        return
+    }
+    await Menu.findByIdAndDelete(req.body.section.id);
+    req.flash('success', `Successfully deleted ${req.body.section.id}`)
+    res.redirect('/admin/delete')
 }

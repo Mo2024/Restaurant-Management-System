@@ -8,13 +8,17 @@ const { storage } = require('../cloudinary/index');
 const { sizeLimit } = require('../utils/limitSize')
 const upload = multer({ limits: { fileSize: sizeLimit }, storage })
 
-router.route('/new')
-    .get(isLoggedIn, isAdmin, admin.new);
+router.get('/new', isLoggedIn, isAdmin, admin.new);
+
+router.get('/delete', isLoggedIn, isAdmin, admin.delete);
 
 router.route('/menu')
     .post(isLoggedIn, isAdmin, validateMenu, catchAsync(admin.newSection))
+    .delete(isLoggedIn, isAdmin, catchAsync(admin.deleteMenu))
 
-router.post('/item', isLoggedIn, isAdmin, upload.array('image'), limitHandler, validateItem, catchAsync(admin.newItem))
+router.route('/item')
+    .post(isLoggedIn, isAdmin, upload.array('image'), limitHandler, validateItem, catchAsync(admin.newItem))
+    .delete(isLoggedIn, isAdmin, catchAsync(admin.deleteItem))
 
 module.exports = router;
 
