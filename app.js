@@ -69,6 +69,7 @@ app.use(catchAsync(async (req, res, next) => {
     res.locals.li = req.flash('li');
     res.locals.sizeLimit = sizeLimit;
     res.locals.menu = await Menu.find({}).populate('items', 'name');
+    // console.log(res.locals.menu)
     next();
 }))
 

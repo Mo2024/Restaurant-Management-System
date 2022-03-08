@@ -18,6 +18,7 @@
                     <% } %>
 
                 </select>
+                <p class="text-white">Warning: Deleting the section will delete all the items in it</p>
             </div>
 
             <div class="mb-3">
@@ -26,6 +27,37 @@
         </form>
     </div>
     <div class="col-lg-6">
+        <h1 class="text-white">Delete Item</h1>
+        <form action="/admin/item?_method=DELETE" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label class="form-label text-white" for="section">Section</label>
 
+                <select id="section-options" name="section[id]" class="form-select" aria-label="Default select example">
+                    <option value="0" selected hidden>Menu Section</option>
+
+                    <% for (let i = 0; i < menu.length; i++)  {%>
+                    <option value="<%=i%>"><%= menu[i].name  %> </option>
+                    <% } %>
+                </select>
+                <p class="text-white"><%=  %> </p>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white" for="section">Section</label>
+
+                <select id="item-options" name="item[id]" class="form-select" aria-label="Default select example">
+
+
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Delete Item</button>
+            </div>
+        </form>
     </div>
 </section>
+
+<p id="yy" style="display:none"> <%= JSON.stringify(menu) %></p>
+<script src="/js/subOptions.js"></script>
