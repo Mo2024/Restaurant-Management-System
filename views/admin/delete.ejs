@@ -33,13 +33,12 @@
                 <label class="form-label text-white" for="section">Section</label>
 
                 <select id="section-options" name="section[id]" class="form-select" aria-label="Default select example">
-                    <option value="0" selected hidden>Menu Section</option>
+                    <option value="Menu Section" selected hidden>Menu Section</option>
 
                     <% for (let i = 0; i < menu.length; i++)  {%>
                     <option value="<%=i%>"><%= menu[i].name  %> </option>
                     <% } %>
                 </select>
-                <p class="text-white"><%=  %> </p>
 
             </div>
             <div class="mb-3">

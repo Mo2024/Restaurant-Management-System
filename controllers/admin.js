@@ -1,5 +1,6 @@
 const Menu = require('../models/menu');
 const Item = require('../models/item');
+const { cloudinary } = require('../cloudinary')
 
 module.exports.new = (req, res) => {
     res.render("admin/new")
@@ -42,6 +43,27 @@ module.exports.deleteMenu = async (req, res) => {
         return
     }
     await Menu.findByIdAndDelete(req.body.section.id);
-    req.flash('success', `Successfully deleted ${req.body.section.id}`)
+    req.flash('success', `Successfully deleted section`)
+    res.redirect('/admin/delete')
+}
+
+module.exports.deleteItem = async (req, res) => {
+    const { id } = req.body.item
+    if (req.body.section.id === "Menu Section" || req.body.item.id === "Item") {
+        req.flash('error', `Please select a section & an item`)
+        res.redirect('/admin/delete')
+        return
+    }
+
+    const item = await Item.findById(id);
+    if (item.images.length) {
+        for (let i = 0; i < item.images.length; i++) {
+            await cloudinary.uploader.destroy(item.images[i].filename);
+
+        }
+    }
+
+    await Item.findByIdAndDelete(id);
+    req.flash('success', `Successfully deleted item`)
     res.redirect('/admin/delete')
 }
