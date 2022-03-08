@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const catchAsync = require('../utils/catchAsync');
 const admin = require('../controllers/admin')
-const { isLoggedIn, isAdmin, validateMenu, validateItem, limitHandler } = require('../middleware')
+const { isLoggedIn, isAdmin, validateMenu, validateItem } = require('../middleware')
 const multer = require('multer')
 const { storage } = require('../cloudinary/index');
-const { sizeLimit } = require('../utils/limitSize')
+const { sizeLimit, limitHandler } = require('../utils/limitSize')
 const upload = multer({ limits: { fileSize: sizeLimit }, storage })
 
 router.get('/new', isLoggedIn, isAdmin, admin.new);
