@@ -1,29 +1,31 @@
-body{
+body {
   font-family: 'Raleway', sans-serif;
   font-family: 'Roboto', sans-serif;
   font-family: 'Ubuntu', sans-serif;
 }
 
-.navbar-nav a{
+.navbar-nav a {
   font-size: 1.2rem !important;
 }
-.navbar-dark{
+
+.navbar-dark {
   background-color: black;
 }
 
-.bg-color{
+.bg-color {
   background-color: rgb(24, 26, 27);
 }
-.navbar-default{
-  color:rgba(255,255,255,.55)
+
+.navbar-default {
+  color: rgba(255, 255, 255, .55)
 }
 
-.border-color-form{
+.border-color-form {
   border-color: rgba(140, 130, 115, 0.13) !important;
 }
 
-#main-image{
-  position:relative;
+#main-image {
+  position: relative;
   /* display: inline-block; */
   top: 0;
   left: 0;
@@ -39,6 +41,14 @@ body{
   /* border-style: none !important; */
 
 }
-.flash{
-  z-Index:100;
+
+.flash {
+  z-Index: 100;
+}
+
+.description-box {
+  display: block;
+  margin: 20px;
+  height: auto;
+  font-family: serif;
 }
