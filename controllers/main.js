@@ -6,3 +6,8 @@ module.exports.homepage = (req, res) => {
     res.render("main/home")
 }
 
+module.exports.menupage = (req, res) => {
+
+    res.render("main/menu")
+}
+

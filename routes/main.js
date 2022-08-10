@@ -6,5 +6,7 @@ const { isLoggedIn, isAdmin } = require('../middleware')
 
 router.get('/', main.homepage);
 
+router.get('/menu', main.menupage);
+
 module.exports = router;
 
